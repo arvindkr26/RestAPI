@@ -2,8 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Bank service Suite">
   <test name="Bank Service Automation Test">
-    <packages>
-      <package name="com.bankservices.scripts"/>
-    </packages>
-  </test> <!-- Bank Service Automation Test -->
-</suite> <!-- Bank service Suite -->
+    <classes>
+      <class name="com.bankservices.scripts.CustomerScript"/>
+      <class name="com.bankservices.scripts.AccountsScript"/>
+      <class name="com.bankservices.scripts.TransactionsScript"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

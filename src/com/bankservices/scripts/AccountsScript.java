@@ -1,15 +1,17 @@
 package com.bankservices.scripts;
 
-import io.restassured.RestAssured;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.is;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import com.jayway.restassured.http.ContentType;
-import static com.jayway.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-import static io.restassured.RestAssured.*;
 
-public class TransactionsScript {
+import com.jayway.restassured.http.ContentType;
+
+import io.restassured.RestAssured;
+
+public class AccountsScript {
 	
 	@BeforeClass
 	public static void init() {
@@ -17,39 +19,40 @@ public class TransactionsScript {
 	}
 	
 	@Test
-	public void TC01_verifyValidTransaction()
+	public void TC01_verifyAccountTransactions()
 	{
 		given()
 		.contentType(ContentType.JSON)
 		
 		.when()
-				.get("/transactions/{transactionid}", 13588 )
+				.get("/accounts/{accountId}/transactions", 12345 )
 			
 		.then()
 				.statusCode(200)
-				.body("parameters.name", is(13588));
-				.body("parameters.accountId", is(13122));
+				.body("parameters.id", is(12700));
+				.body("parameters.accountId", is(12345));
 				.body("parameters.type", contains("Credit"));
 				.body("parameters.date", is("2017-08-09T00:00:00-07:00"));
 				.body("parameters.amount", is(1000.00));
 				.body("parameters.description", contains("Funds Transfer Received"));
-				
-				
+			
 
 	}
 	
 	@Test
-	public void TC02_verifyInvalidTransaction()
+	public void TC02_verifyAccountTransactionsInvalidID()
 	{
 		given()
 		.contentType(ContentType.JSON)
 		
 		.when()
-				.get("/transactions/{transactionid}", 1358)
+				.get("/accounts/{accountId}/transactions", 1234 )
 			
 		.then()
 				.statusCode(404)
-				.body("responses.description", contains("Could not find transaction #"));
+				.body("parameters.description", contains(" Message "));
+			
+
 	}
 
 }

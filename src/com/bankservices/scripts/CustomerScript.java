@@ -7,8 +7,7 @@ import org.testng.annotations.Test;
 
 import com.bankservices.model.Customer;
 import com.jayway.restassured.http.ContentType;
-
-//import static com.jayway.restassured.RestAssured.*;
+import static com.jayway.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
 
@@ -29,7 +28,7 @@ public class CustomerScript {
 			.body(customer)
 			
 		.when()
-			.post("/customers/12212/sellPosition")
+			.post("/customers/{customerId}/sellPosition",12212)
 			
 		.then()
 			.statusCode(200)
@@ -51,7 +50,7 @@ public class CustomerScript {
 			.body(customer1)
 			
 		.when()
-			.post("/customers/12212/sellPosition")
+			.post("/customers/{customerId}/buyPosition",12212)
 			
 		.then()
 			.statusCode(200)
@@ -60,7 +59,7 @@ public class CustomerScript {
 			.body("name", is(customer1.setName()))
 			.body("symbol", is(customer1.setSymbol()))
 			.body("shares", is(customer1.setshares()));
-			.body("pricePerShare", is(customer1.setpricePerShare()));		
+			.body("pricePerShare", is(customer1.setpricePerShare()));
 
 	}
 
