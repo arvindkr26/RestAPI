@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Bank service Suite">
+  <test name="Bank Service Automation Test">
+    <packages>
+      <package name="com.bankservices.scripts"/>
+    </packages>
+  </test> <!-- Bank Service Automation Test -->
+</suite> <!-- Bank service Suite -->
